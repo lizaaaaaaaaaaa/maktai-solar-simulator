@@ -1,85 +1,91 @@
 const AREA_FACTOR = {
+  tohoku: 0.95,
   tokyo: 1.0,
+  hokuriku: 0.96,
+  chubu: 1.03,
   kansai: 1.02,
   chugoku: 1.04,
+  shikoku: 1.06,
   kyushu: 1.08
 };
 
 const AREA_LABELS = {
-  tokyo: "東京電力エリア",
-  kansai: "関西電力エリア",
-  chugoku: "中国電力エリア",
-  kyushu: "九州電力エリア"
+  tohoku: "東北電力",
+  tokyo: "東京電力",
+  hokuriku: "北陸電力",
+  chubu: "中部電力",
+  kansai: "関西電力",
+  chugoku: "中国電力",
+  shikoku: "四国電力",
+  kyushu: "九州電力"
 };
 
 const POWER_PLANS = {
+  tohoku: {
+    standard_b: { label: "従量電灯B", buyPrice: 35, note: "標準的な従量制プランの参考値" },
+    enet_value: { label: "よりそう＋eねっとバリュー", buyPrice: 34, note: "一般家庭向けプランの参考値" },
+    family_value: { label: "よりそう＋ファミリーバリュー相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
+    night_holiday: { label: "よりそう＋ナイト＆ホリデー相当", buyPrice: 32, note: "夜間・休日活用プランの参考値" },
+    smart_time: { label: "よりそう＋スマートタイム相当", buyPrice: 32, note: "時間帯別プランの参考値" }
+  },
+
   tokyo: {
-    standard: {
-      label: "従量電灯B・標準的なプラン",
-      buyPrice: 35,
-      note: "標準的な電力単価として試算"
-    },
-    smart: {
-      label: "スタンダードS相当",
-      buyPrice: 34,
-      note: "一般家庭向けプランの参考値として試算"
-    },
-    night: {
-      label: "スマートライフ系・夜間活用プラン",
-      buyPrice: 32,
-      note: "夜間電力活用を想定した参考値として試算"
-    }
+    standard_b: { label: "従量電灯B", buyPrice: 36, note: "標準的な従量制プランの参考値" },
+    standard_c: { label: "従量電灯C相当", buyPrice: 36, note: "容量大きめ契約の参考値" },
+    standard_s: { label: "スタンダードS相当", buyPrice: 35, note: "一般家庭向けプランの参考値" },
+    premium_s: { label: "プレミアムS相当", buyPrice: 34, note: "使用量多め家庭向けの参考値" },
+    smart_life: { label: "スマートライフ系", buyPrice: 33, note: "オール電化・夜間活用プランの参考値" }
   },
+
+  hokuriku: {
+    standard: { label: "従量電灯", buyPrice: 33, note: "標準的な従量制プランの参考値" },
+    next: { label: "従量電灯ネクスト相当", buyPrice: 32, note: "一般家庭向けプランの参考値" },
+    erai_tokutoku: { label: "節電とくとく電灯相当", buyPrice: 32, note: "一般家庭向けプランの参考値" },
+    night12: { label: "くつろぎナイト12", buyPrice: 30, note: "夜間・休日活用プランの参考値" }
+  },
+
+  chubu: {
+    standard_b: { label: "従量電灯B", buyPrice: 29, note: "標準的な従量制プランの参考値" },
+    point: { label: "ポイントプラン相当", buyPrice: 28, note: "一般家庭向けプランの参考値" },
+    otoku: { label: "おとくプラン相当", buyPrice: 28, note: "一般家庭向けプランの参考値" },
+    tokutoku: { label: "とくとくプラン相当", buyPrice: 28, note: "使用量多め家庭向けの参考値" },
+    smart_life: { label: "スマートライフプラン", buyPrice: 27, note: "夜間活用プランの参考値" },
+    smart_life_morning: { label: "スマートライフプラン 朝とく相当", buyPrice: 27, note: "朝型生活向け夜間活用プランの参考値" },
+    smart_life_night: { label: "スマートライフプラン 夜とく相当", buyPrice: 27, note: "夜型生活向け夜間活用プランの参考値" }
+  },
+
   kansai: {
-    standard: {
-      label: "従量電灯A・標準的なプラン",
-      buyPrice: 34,
-      note: "標準的な電力単価として試算"
-    },
-    value: {
-      label: "なっトクでんき相当",
-      buyPrice: 33,
-      note: "一般家庭向けプランの参考値として試算"
-    },
-    denka: {
-      label: "はぴeタイム系・オール電化プラン",
-      buyPrice: 31,
-      note: "オール電化向けの参考値として試算"
-    }
+    standard_a: { label: "従量電灯A", buyPrice: 36, note: "標準的な従量制プランの参考値" },
+    standard_b: { label: "従量電灯B相当", buyPrice: 36, note: "容量大きめ契約の参考値" },
+    nattoku: { label: "なっトクでんき相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
+    with_point: { label: "withポイント でんき相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
+    hapie_r: { label: "はぴeタイムR", buyPrice: 32, note: "オール電化・時間帯別プランの参考値" }
   },
+
   chugoku: {
-    standard: {
-      label: "従量電灯A・標準的なプラン",
-      buyPrice: 34,
-      note: "標準的な電力単価として試算"
-    },
-    value: {
-      label: "ぐっとずっと。プラン相当",
-      buyPrice: 33,
-      note: "一般家庭向けプランの参考値として試算"
-    },
-    denka: {
-      label: "電化Styleコース相当",
-      buyPrice: 31,
-      note: "オール電化向けの参考値として試算"
-    }
+    standard_a: { label: "従量電灯A", buyPrice: 34, note: "標準的な従量制プランの参考値" },
+    standard_b: { label: "従量電灯B相当", buyPrice: 34, note: "容量大きめ契約の参考値" },
+    value: { label: "ぐっとずっと。プラン相当", buyPrice: 33, note: "一般家庭向けプランの参考値" },
+    smart_course: { label: "スマートコース相当", buyPrice: 33, note: "一般家庭向けプランの参考値" },
+    denka: { label: "電化Styleコース", buyPrice: 31, note: "オール電化・時間帯別プランの参考値" }
   },
+
+  shikoku: {
+    standard_a: { label: "従量電灯A", buyPrice: 37, note: "標準的な従量制プランの参考値" },
+    standard_b: { label: "従量電灯B相当", buyPrice: 37, note: "容量大きめ契約の参考値" },
+    value: { label: "おトクeプラン相当", buyPrice: 35, note: "一般家庭向けプランの参考値" },
+    denka_e: { label: "でんかeプラン", buyPrice: 34, note: "電化住宅向けプランの参考値" },
+    smart_e: { label: "スマートeプラン相当", buyPrice: 34, note: "時間帯別プランの参考値" }
+  },
+
   kyushu: {
-    standard: {
-      label: "従量電灯B・標準的なプラン",
-      buyPrice: 34,
-      note: "標準的な電力単価として試算"
-    },
-    family: {
-      label: "スマートファミリープラン相当",
-      buyPrice: 33,
-      note: "一般家庭向けプランの参考値として試算"
-    },
-    night: {
-      label: "電化でナイト・セレクト相当",
-      buyPrice: 31,
-      note: "夜間電力活用を想定した参考値として試算"
-    }
+    standard_b: { label: "従量電灯B", buyPrice: 27, note: "標準的な従量制プランの参考値" },
+    standard_c: { label: "従量電灯C相当", buyPrice: 27, note: "容量大きめ契約の参考値" },
+    smart_family: { label: "スマートファミリープラン相当", buyPrice: 26, note: "一般家庭向けプランの参考値" },
+    jikan_tai: { label: "時間帯別電灯相当", buyPrice: 25, note: "時間帯別プランの参考値" },
+    night_select_21: { label: "電化でナイト・セレクト21", buyPrice: 24, note: "夜間活用プランの参考値" },
+    night_select_22: { label: "電化でナイト・セレクト22", buyPrice: 24, note: "夜間活用プランの参考値" },
+    night_select_23: { label: "電化でナイト・セレクト23", buyPrice: 24, note: "夜間活用プランの参考値" }
   }
 };
 
@@ -244,9 +250,7 @@ function getSelectedPowerPlan(area, planKey) {
 }
 
 function getV2HFit({ solarKw, evStatus, disasterScore }) {
-  if (solarKw <= 0) {
-    return "低";
-  }
+  if (solarKw <= 0) return "低";
 
   if (evStatus === "yes" && solarKw >= 4 && disasterScore >= 5) {
     return "高";
@@ -260,22 +264,10 @@ function getV2HFit({ solarKw, evStatus, disasterScore }) {
 }
 
 function getRecommendedBattery(solarKw) {
-  if (solarKw <= 0) {
-    return "要確認";
-  }
-
-  if (solarKw >= 7) {
-    return "10〜12kWh";
-  }
-
-  if (solarKw >= 5) {
-    return "7〜10kWh";
-  }
-
-  if (solarKw >= 3) {
-    return "5〜7kWh";
-  }
-
+  if (solarKw <= 0) return "要確認";
+  if (solarKw >= 7) return "10〜12kWh";
+  if (solarKw >= 5) return "7〜10kWh";
+  if (solarKw >= 3) return "5〜7kWh";
   return "要確認";
 }
 
@@ -301,18 +293,8 @@ function getV2HExplanation({ solarKw, evStatus, disasterScore, v2hFit, v2hAdditi
 
 function createMonthlyGeneration(annualGeneration) {
   const monthlyRatio = [
-    0.06,
-    0.075,
-    0.09,
-    0.105,
-    0.115,
-    0.095,
-    0.11,
-    0.105,
-    0.085,
-    0.075,
-    0.06,
-    0.045
+    0.06, 0.075, 0.09, 0.105, 0.115, 0.095,
+    0.11, 0.105, 0.085, 0.075, 0.06, 0.045
   ];
 
   return monthlyRatio.map((ratio) => Math.round(annualGeneration * ratio));

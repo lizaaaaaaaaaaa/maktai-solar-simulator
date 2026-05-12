@@ -11,7 +11,7 @@
   <main class="simulator">
     <section class="hero">
       <p class="brand">MaktAI</p>
-      <h1>太陽光・蓄電池・V2Hシミュレーター</h1>
+      <h1>太陽光・蓄電池・V2Hシミレーター</h1>
       <p class="hero-copy">
         個人情報なしで、電気代削減・蓄電池容量・V2H適合度をかんたん診断。
       </p>
@@ -39,21 +39,37 @@
       </div>
 
       <div class="field">
-        <label for="area">電力エリア</label>
+        <label for="area">電力会社</label>
+        <p class="field-help">
+          現在ご契約中、またはお住まいの地域に近い電力会社を選択してください。
+        </p>
         <select id="area">
-          <option value="tokyo">東京電力エリア</option>
-          <option value="kansai">関西電力エリア</option>
-          <option value="chugoku" selected>中国電力エリア</option>
-          <option value="kyushu">九州電力エリア</option>
+          <option value="tohoku">東北電力</option>
+          <option value="tokyo">東京電力</option>
+          <option value="hokuriku">北陸電力</option>
+          <option value="chubu">中部電力</option>
+          <option value="kansai">関西電力</option>
+          <option value="chugoku" selected>中国電力</option>
+          <option value="shikoku">四国電力</option>
+          <option value="kyushu">九州電力</option>
         </select>
       </div>
 
       <div class="field">
         <label for="powerPlan">電力プラン</label>
         <p class="field-help">
-          契約中のプランに近いものを選択してください。わからない場合は、標準的なプランを選択してください。
+          契約中のプランに近いものを選択してください。該当するプランがない場合は、標準的なプランを選択してください。
         </p>
         <select id="powerPlan"></select>
+      </div>
+
+      <div class="input-note">
+        <strong>シミュレーション入力に関する注意</strong>
+        <p>
+          電力プランは、各電力会社の家庭向け主要プランを参考にした選択肢です。
+          すべての契約メニュー、新電力、法人向けプラン、受付終了プランを網羅するものではありません。
+          実際の料金単価、燃料費調整額、再生可能エネルギー発電促進賦課金は、契約内容や時期により変動します。
+        </p>
       </div>
 
       <div class="field">
@@ -133,7 +149,7 @@
             <dd id="selectedSolarKw">-</dd>
           </div>
           <div>
-            <dt>電力エリア</dt>
+            <dt>電力会社</dt>
             <dd id="selectedArea">-</dd>
           </div>
           <div>
@@ -161,6 +177,14 @@
             <dd id="selectedDisasterLevel">-</dd>
           </div>
         </dl>
+      </div>
+
+      <div class="result-note">
+        <strong>選択条件と結果について</strong>
+        <p>
+          以下の結果は、選択された電力会社・電力プラン・太陽光容量・売電状況などをもとにした簡易試算です。
+          実際の電気料金や経済効果は、契約容量、時間帯別使用量、燃料費調整額、再エネ賦課金、機器構成により変動します。
+        </p>
       </div>
 
       <div class="summary-grid">
@@ -255,6 +279,9 @@
         </p>
         <p>
           電力単価、燃料費調整額、再生可能エネルギー発電促進賦課金、売電単価は、シミュレーション用の参考値を用いています。実際の単価は、契約中の電力会社・電力プラン・時期により異なります。
+        </p>
+        <p>
+          電力会社ごとの時間帯区分は、平日・休日・季節などにより複数に分かれている場合があります。本シミュレーションでは、比較しやすいように代表的な単価・平均的な単価を用いて試算しています。
         </p>
         <p>
           発電電力量、売電金額、買電削減金額、15年間の累計効果は、入力条件に基づく推計値です。太陽光パネルや蓄電池の経年劣化、利用環境、季節変動を完全に反映するものではありません。

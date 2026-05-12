@@ -225,8 +225,29 @@ select:focus {
   font-size: 14px;
 }
 
-.selected-card {
-  background: #ffffff;
+.input-note,
+.result-note {
+  margin-top: 16px;
+  padding: 18px 20px;
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  color: var(--muted);
+  border-radius: 18px;
+}
+
+.input-note strong,
+.result-note strong {
+  display: block;
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.input-note p,
+.result-note p {
+  margin: 0;
+  line-height: 1.8;
+  font-size: 13px;
 }
 
 .selected-grid {

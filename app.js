@@ -53,8 +53,8 @@ function populatePowerPlans(area) {
   const plans = POWER_PLANS[area] || POWER_PLANS.chugoku;
 
   powerPlanSelect.innerHTML = Object.entries(plans)
-    .map(([key, plan]) => {
-      const selected = area === "chugoku" && key === "standard" ? "selected" : "";
+    .map(([key, plan], index) => {
+      const selected = index === 0 ? "selected" : "";
       return `<option value="${key}" ${selected}>${plan.label}</option>`;
     })
     .join("");
