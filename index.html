@@ -12,82 +12,106 @@
     <section class="hero">
       <p class="brand">MaktAI</p>
       <h1>太陽光・蓄電池・V2Hシミュレーター</h1>
-      <p>
+      <p class="hero-copy">
         個人情報なしで、電気代削減・蓄電池容量・V2H適合度をかんたん診断。
       </p>
-      <p class="notice">※本シミュレーションは補助金を含まない概算です。</p>
-      <button id="startBtn">シミュレーション開始</button>
+
+      <div class="hero-actions">
+        <p class="notice-pill">※本シミュレーションは補助金を含まない概算です。</p>
+        <button id="startBtn" type="button">シミュレーション開始</button>
+      </div>
     </section>
 
-    <section id="formSection" class="card hidden">
+    <section id="formSection" class="card">
       <h2>診断項目を選択してください</h2>
 
-      <label>太陽光容量</label>
-      <select id="solarKw">
-        <option value="0">未設置・不明</option>
-        <option value="3">3.0kW</option>
-        <option value="4">4.0kW</option>
-        <option value="5">5.0kW</option>
-        <option value="6">6.0kW</option>
-        <option value="7">7.0kW</option>
-        <option value="8">8.0kW以上</option>
-      </select>
+      <div class="field">
+        <label for="solarKw">太陽光容量</label>
+        <select id="solarKw">
+          <option value="0">未設置・不明</option>
+          <option value="3">3.0kW</option>
+          <option value="4" selected>4.0kW</option>
+          <option value="5">5.0kW</option>
+          <option value="6">6.0kW</option>
+          <option value="7">7.0kW</option>
+          <option value="8">8.0kW以上</option>
+        </select>
+      </div>
 
-      <label>電力エリア</label>
-      <select id="area">
-        <option value="tokyo">東京電力エリア</option>
-        <option value="kansai">関西電力エリア</option>
-        <option value="chugoku">中国電力エリア</option>
-        <option value="kyushu">九州電力エリア</option>
-      </select>
+      <div class="field">
+        <label for="area">電力エリア</label>
+        <select id="area">
+          <option value="tokyo">東京電力エリア</option>
+          <option value="kansai">関西電力エリア</option>
+          <option value="chugoku" selected>中国電力エリア</option>
+          <option value="kyushu">九州電力エリア</option>
+        </select>
+      </div>
 
-      <label>月の電気代</label>
-      <select id="monthlyBill">
-        <option value="8000">〜8,000円</option>
-        <option value="12000">8,000〜12,000円</option>
-        <option value="18000">12,000〜18,000円</option>
-        <option value="25000">18,000〜25,000円</option>
-        <option value="30000">25,000円以上</option>
-      </select>
+      <div class="field">
+        <label for="monthlyBill">月の電気代</label>
+        <select id="monthlyBill">
+          <option value="8000">〜8,000円</option>
+          <option value="12000" selected>8,000〜12,000円</option>
+          <option value="18000">12,000〜18,000円</option>
+          <option value="25000">18,000〜25,000円</option>
+          <option value="30000">25,000円以上</option>
+        </select>
+      </div>
 
-      <label>卒FIT状況</label>
-      <select id="fitStatus">
-        <option value="post_fit">卒FIT済み</option>
-        <option value="soon">3年以内に卒FIT予定</option>
-        <option value="active">まだ先</option>
-        <option value="unknown">わからない</option>
-      </select>
+      <div class="field">
+        <label for="fitStatus">卒FIT状況</label>
+        <select id="fitStatus">
+          <option value="post_fit">卒FIT済み</option>
+          <option value="soon">3年以内に卒FIT予定</option>
+          <option value="active">まだ先</option>
+          <option value="unknown" selected>わからない</option>
+        </select>
+      </div>
 
-      <label>昼間の在宅状況</label>
-      <select id="daytimeHome">
-        <option value="low">少ない</option>
-        <option value="middle">普通</option>
-        <option value="high">多い</option>
-      </select>
+      <div class="field">
+        <label for="daytimeHome">昼間の在宅状況</label>
+        <select id="daytimeHome">
+          <option value="low" selected>少ない</option>
+          <option value="middle">普通</option>
+          <option value="high">多い</option>
+        </select>
+      </div>
 
-      <label>EVの有無</label>
-      <select id="evStatus">
-        <option value="yes">持っている</option>
-        <option value="planned">購入予定あり</option>
-        <option value="no">持っていない</option>
-      </select>
+      <div class="field">
+        <label for="evStatus">EVの有無</label>
+        <select id="evStatus">
+          <option value="yes">持っている</option>
+          <option value="planned">購入予定あり</option>
+          <option value="no" selected>持っていない</option>
+        </select>
+      </div>
 
-      <label>停電・災害対策の重視度</label>
-      <select id="disasterLevel">
-        <option value="1">1：低い</option>
-        <option value="2">2</option>
-        <option value="3">3：普通</option>
-        <option value="4">4</option>
-        <option value="5">5：高い</option>
-      </select>
+      <div class="field">
+        <label for="disasterLevel">停電・災害対策の重視度</label>
+        <select id="disasterLevel">
+          <option value="1">1：低い</option>
+          <option value="2">2</option>
+          <option value="3" selected>3：普通</option>
+          <option value="4">4</option>
+          <option value="5">5：高い</option>
+        </select>
+      </div>
 
-      <button id="simulateBtn">結果を見る</button>
+      <button id="simulateBtn" type="button">結果を見る</button>
     </section>
 
-    <section id="resultSection" class="hidden">
+    <section id="resultSection" class="result-section hidden">
       <div class="result-header">
         <h2>シミュレーション結果</h2>
         <span>補助金未反映</span>
+      </div>
+
+      <div class="result-warning">
+        <strong>この結果は補助金を含まない概算です。</strong>
+        <p>
+          表示される金額には、自治体補助金・国の補助制度・キャンペーン・個別見積・工事費の増減は含まれていません。
+        </p>
       </div>
 
       <div class="summary-grid">
@@ -109,6 +133,36 @@
         </div>
       </div>
 
+      <div class="explanation-card" id="v2hExplanationCard">
+        <h3>V2H診断コメント</h3>
+        <p id="v2hExplanation">-</p>
+      </div>
+
+      <div class="breakdown-card">
+        <h3>年間メリットの内訳</h3>
+        <div class="breakdown-grid">
+          <div>
+            <p>自家消費による削減</p>
+            <strong id="selfConsumptionBenefit">-</strong>
+          </div>
+          <div>
+            <p>売電見込み</p>
+            <strong id="sellIncome">-</strong>
+          </div>
+          <div>
+            <p>蓄電池活用効果</p>
+            <strong id="batteryBenefit">-</strong>
+          </div>
+          <div>
+            <p>V2H追加効果</p>
+            <strong id="v2hAdditionalBenefit">-</strong>
+          </div>
+        </div>
+        <p class="small-note">
+          ※上記は入力条件に基づく概算です。実際の効果は電力使用量、機器構成、施工条件により変動します。
+        </p>
+      </div>
+
       <div class="chart-card">
         <h3>月別発電量</h3>
         <canvas id="generationChart"></canvas>
@@ -117,6 +171,9 @@
       <div class="chart-card">
         <h3>V2Hなし / V2Hあり 比較</h3>
         <canvas id="v2hCompareChart"></canvas>
+        <p class="small-note">
+          ※EVを所有していない場合、V2H追加効果は原則0円として表示されます。
+        </p>
       </div>
 
       <div class="compare-card">
@@ -133,12 +190,19 @@
         </table>
       </div>
 
-      <p class="disclaimer">
-        本結果は、入力内容と一般的な電気料金・発電量の目安に基づく簡易シミュレーションです。
-        補助金、キャンペーン、機器価格、工事費、売電単価、実際の電力使用量は反映していません。
-      </p>
+      <div class="disclaimer">
+        <p>
+          本結果は、入力内容と一般的な電気料金・発電量の目安に基づく簡易シミュレーションです。
+          補助金、キャンペーン、機器価格、工事費、売電単価、実際の電力使用量は反映していません。
+          正確な金額は現地調査・見積・最新制度の確認が必要です。
+        </p>
+        <p>
+          V2Hは、経済効果だけでなく、停電時の電源確保やEV活用価値を含めて検討する設備です。
+          導入費用が上がる可能性があるため、最終判断には現地確認と見積が必要です。
+        </p>
+      </div>
 
-      <a class="line-cta" href="https://line.me/R/ti/p/XXXXXXXX" target="_blank">
+      <a class="line-cta" href="https://line.me/R/ti/p/XXXXXXXX" target="_blank" rel="noopener">
         LINEで詳細診断する
       </a>
     </section>
