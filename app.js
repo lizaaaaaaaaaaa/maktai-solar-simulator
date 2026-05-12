@@ -2,6 +2,18 @@ const startBtn = document.getElementById("startBtn");
 const simulateBtn = document.getElementById("simulateBtn");
 const formSection = document.getElementById("formSection");
 const resultSection = document.getElementById("resultSection");
+const areaSelect = document.getElementById("area");
+const powerPlanSelect = document.getElementById("powerPlan");
+
+document.addEventListener("DOMContentLoaded", () => {
+  populatePowerPlans(areaSelect.value);
+});
+
+if (areaSelect) {
+  areaSelect.addEventListener("change", () => {
+    populatePowerPlans(areaSelect.value);
+  });
+}
 
 if (startBtn) {
   startBtn.addEventListener("click", () => {
@@ -14,8 +26,9 @@ if (simulateBtn) {
     const input = {
       solarKw: document.getElementById("solarKw").value,
       area: document.getElementById("area").value,
+      powerPlan: document.getElementById("powerPlan").value,
       monthlyBill: document.getElementById("monthlyBill").value,
-      fitStatus: document.getElementById("fitStatus").value,
+      sellStatus: document.getElementById("sellStatus").value,
       daytimeHome: document.getElementById("daytimeHome").value,
       evStatus: document.getElementById("evStatus").value,
       disasterLevel: document.getElementById("disasterLevel").value
@@ -23,6 +36,7 @@ if (simulateBtn) {
 
     const result = calculateSimulation(input);
 
+    updateSelectedConditions(result);
     updateSummary(result);
     updateBreakdown(result);
     updateV2HExplanation(result);
@@ -33,6 +47,28 @@ if (simulateBtn) {
     resultSection.classList.remove("hidden");
     resultSection.scrollIntoView({ behavior: "smooth" });
   });
+}
+
+function populatePowerPlans(area) {
+  const plans = POWER_PLANS[area] || POWER_PLANS.chugoku;
+
+  powerPlanSelect.innerHTML = Object.entries(plans)
+    .map(([key, plan]) => {
+      const selected = area === "chugoku" && key === "standard" ? "selected" : "";
+      return `<option value="${key}" ${selected}>${plan.label}</option>`;
+    })
+    .join("");
+}
+
+function updateSelectedConditions(result) {
+  document.getElementById("selectedSolarKw").textContent = SOLAR_LABELS[result.solarKw] || `${result.solarKw}kW`;
+  document.getElementById("selectedArea").textContent = AREA_LABELS[result.area] || "-";
+  document.getElementById("selectedPowerPlan").textContent = result.selectedPlan.label;
+  document.getElementById("selectedMonthlyBill").textContent = MONTHLY_BILL_LABELS[result.monthlyBill] || "-";
+  document.getElementById("selectedSellStatus").textContent = SELL_STATUS_LABELS[result.sellStatus] || "-";
+  document.getElementById("selectedDaytimeHome").textContent = DAYTIME_HOME_LABELS[result.daytimeHome] || "-";
+  document.getElementById("selectedEvStatus").textContent = EV_STATUS_LABELS[result.evStatus] || "-";
+  document.getElementById("selectedDisasterLevel").textContent = DISASTER_LABELS[result.disasterLevel] || "-";
 }
 
 function updateSummary(result) {
@@ -62,7 +98,7 @@ function renderCompareTable(result) {
       : formatYen(result.v2hAdditionalBenefit);
 
   const disasterWithoutV2H =
-    result.disasterLevel >= 4 ? "中" : "標準";
+    result.disasterScore >= 5 ? "中" : "標準";
 
   const disasterWithV2H =
     result.v2hFit === "高" ? "高" :

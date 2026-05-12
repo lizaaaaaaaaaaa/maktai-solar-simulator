@@ -1,39 +1,166 @@
 const AREA_FACTOR = {
-  hokkaido: 0.92,
-  tohoku: 0.95,
   tokyo: 1.0,
-  chubu: 1.03,
   kansai: 1.02,
   chugoku: 1.04,
-  shikoku: 1.06,
-  kyushu: 1.08,
-  okinawa: 1.1
+  kyushu: 1.08
+};
+
+const AREA_LABELS = {
+  tokyo: "東京電力エリア",
+  kansai: "関西電力エリア",
+  chugoku: "中国電力エリア",
+  kyushu: "九州電力エリア"
+};
+
+const POWER_PLANS = {
+  tokyo: {
+    standard: {
+      label: "従量電灯B・標準的なプラン",
+      buyPrice: 35,
+      note: "標準的な電力単価として試算"
+    },
+    smart: {
+      label: "スタンダードS相当",
+      buyPrice: 34,
+      note: "一般家庭向けプランの参考値として試算"
+    },
+    night: {
+      label: "スマートライフ系・夜間活用プラン",
+      buyPrice: 32,
+      note: "夜間電力活用を想定した参考値として試算"
+    }
+  },
+  kansai: {
+    standard: {
+      label: "従量電灯A・標準的なプラン",
+      buyPrice: 34,
+      note: "標準的な電力単価として試算"
+    },
+    value: {
+      label: "なっトクでんき相当",
+      buyPrice: 33,
+      note: "一般家庭向けプランの参考値として試算"
+    },
+    denka: {
+      label: "はぴeタイム系・オール電化プラン",
+      buyPrice: 31,
+      note: "オール電化向けの参考値として試算"
+    }
+  },
+  chugoku: {
+    standard: {
+      label: "従量電灯A・標準的なプラン",
+      buyPrice: 34,
+      note: "標準的な電力単価として試算"
+    },
+    value: {
+      label: "ぐっとずっと。プラン相当",
+      buyPrice: 33,
+      note: "一般家庭向けプランの参考値として試算"
+    },
+    denka: {
+      label: "電化Styleコース相当",
+      buyPrice: 31,
+      note: "オール電化向けの参考値として試算"
+    }
+  },
+  kyushu: {
+    standard: {
+      label: "従量電灯B・標準的なプラン",
+      buyPrice: 34,
+      note: "標準的な電力単価として試算"
+    },
+    family: {
+      label: "スマートファミリープラン相当",
+      buyPrice: 33,
+      note: "一般家庭向けプランの参考値として試算"
+    },
+    night: {
+      label: "電化でナイト・セレクト相当",
+      buyPrice: 31,
+      note: "夜間電力活用を想定した参考値として試算"
+    }
+  }
 };
 
 const SELL_PRICE = {
   post_fit: 8,
   soon: 10,
   active: 16,
-  unknown: 10
+  unknown: 10,
+  no_solar: 0
+};
+
+const SELL_STATUS_LABELS = {
+  post_fit: "すでに売電価格が下がっている",
+  soon: "数年以内に売電価格が下がる予定",
+  active: "まだ固定価格で売電できている",
+  unknown: "わからない",
+  no_solar: "太陽光を設置していない"
+};
+
+const DAYTIME_HOME_LABELS = {
+  high: "多い",
+  middle: "普通",
+  low: "少ない"
+};
+
+const EV_STATUS_LABELS = {
+  yes: "持っている",
+  planned: "購入予定あり",
+  no: "持っていない"
+};
+
+const DISASTER_LABELS = {
+  low: "低い",
+  middle: "普通",
+  high: "高い"
+};
+
+const DISASTER_SCORE = {
+  low: 1,
+  middle: 3,
+  high: 5
+};
+
+const MONTHLY_BILL_LABELS = {
+  8000: "〜8,000円",
+  12000: "8,000〜12,000円",
+  18000: "12,000〜18,000円",
+  25000: "18,000〜25,000円",
+  30000: "25,000円以上"
+};
+
+const SOLAR_LABELS = {
+  0: "未設置・不明",
+  3: "3.0kW",
+  4: "4.0kW",
+  5: "5.0kW",
+  6: "6.0kW",
+  7: "7.0kW",
+  8: "8.0kW以上"
 };
 
 const SELF_CONSUMPTION_RATE = {
-  low: 0.28,
+  high: 0.45,
   middle: 0.35,
-  high: 0.45
+  low: 0.28
 };
 
 const BATTERY_UP_RATE = {
-  low: 0.22,
+  high: 0.12,
   middle: 0.17,
-  high: 0.12
+  low: 0.22
 };
 
 function calculateSimulation(input) {
   const solarKw = Number(input.solarKw);
   const areaFactor = AREA_FACTOR[input.area] || 1.0;
-  const buyPrice = 35;
-  const sellPrice = SELL_PRICE[input.fitStatus] || 10;
+
+  const selectedPlan = getSelectedPowerPlan(input.area, input.powerPlan);
+  const buyPrice = selectedPlan.buyPrice;
+
+  const sellPrice = SELL_PRICE[input.sellStatus] ?? 10;
 
   const annualGeneration = Math.max(0, Math.round(solarKw * areaFactor * 1050));
 
@@ -44,7 +171,7 @@ function calculateSimulation(input) {
   const sellIncome = Math.round(annualGeneration * (1 - selfRate) * sellPrice);
   const batteryBenefit = Math.round(annualGeneration * batteryUpRate * buyPrice);
 
-  const disasterLevel = Number(input.disasterLevel);
+  const disasterScore = DISASTER_SCORE[input.disasterLevel] || 3;
 
   const evFactor =
     input.evStatus === "yes" ? 1 :
@@ -54,7 +181,7 @@ function calculateSimulation(input) {
   let v2hAdditionalBenefit = 0;
 
   if (solarKw > 0 && evFactor > 0) {
-    v2hAdditionalBenefit = Math.round(evFactor * solarKw * disasterLevel * 8000);
+    v2hAdditionalBenefit = Math.round(evFactor * solarKw * disasterScore * 8000);
   }
 
   const benefitWithoutV2H = Math.round(
@@ -71,7 +198,7 @@ function calculateSimulation(input) {
   const v2hFit = getV2HFit({
     solarKw,
     evStatus: input.evStatus,
-    disasterLevel
+    disasterScore
   });
 
   const recommendedBattery = getRecommendedBattery(solarKw);
@@ -79,7 +206,7 @@ function calculateSimulation(input) {
   const v2hExplanation = getV2HExplanation({
     solarKw,
     evStatus: input.evStatus,
-    disasterLevel,
+    disasterScore,
     v2hFit,
     v2hAdditionalBenefit
   });
@@ -99,21 +226,33 @@ function calculateSimulation(input) {
     v2hExplanation,
     monthlyGeneration: createMonthlyGeneration(annualGeneration),
     solarKw,
+    area: input.area,
+    powerPlan: input.powerPlan,
+    monthlyBill: input.monthlyBill,
+    sellStatus: input.sellStatus,
+    daytimeHome: input.daytimeHome,
     evStatus: input.evStatus,
-    disasterLevel
+    disasterLevel: input.disasterLevel,
+    disasterScore,
+    selectedPlan
   };
 }
 
-function getV2HFit({ solarKw, evStatus, disasterLevel }) {
+function getSelectedPowerPlan(area, planKey) {
+  const areaPlans = POWER_PLANS[area] || POWER_PLANS.chugoku;
+  return areaPlans[planKey] || Object.values(areaPlans)[0];
+}
+
+function getV2HFit({ solarKw, evStatus, disasterScore }) {
   if (solarKw <= 0) {
     return "低";
   }
 
-  if (evStatus === "yes" && solarKw >= 4 && disasterLevel >= 4) {
+  if (evStatus === "yes" && solarKw >= 4 && disasterScore >= 5) {
     return "高";
   }
 
-  if ((evStatus === "yes" || evStatus === "planned") && solarKw >= 3 && disasterLevel >= 3) {
+  if ((evStatus === "yes" || evStatus === "planned") && solarKw >= 3 && disasterScore >= 3) {
     return "中";
   }
 
@@ -140,7 +279,7 @@ function getRecommendedBattery(solarKw) {
   return "要確認";
 }
 
-function getV2HExplanation({ solarKw, evStatus, disasterLevel, v2hFit, v2hAdditionalBenefit }) {
+function getV2HExplanation({ solarKw, evStatus, disasterScore, v2hFit, v2hAdditionalBenefit }) {
   if (solarKw <= 0) {
     return "太陽光容量が未設置・不明のため、V2Hによる発電電力の活用効果は概算しにくい状態です。まずは太陽光の有無や容量を確認したうえで、蓄電池やV2Hの適合性を判断するのがおすすめです。";
   }
@@ -154,7 +293,7 @@ function getV2HExplanation({ solarKw, evStatus, disasterLevel, v2hFit, v2hAdditi
   }
 
   if (evStatus === "yes" && v2hFit === "高") {
-    return `EVを所有しており、太陽光容量と停電対策の重視度も高いため、V2Hとの相性は高めです。概算のV2H追加効果は年間${formatYen(v2hAdditionalBenefit)}です。ただし、導入費用も上がりやすいため、経済効果だけでなく防災価値も含めて検討するのがおすすめです。`;
+    return `EVを所有しており、太陽光容量と停電対策の重要度も高いため、V2Hとの相性は高めです。概算のV2H追加効果は年間${formatYen(v2hAdditionalBenefit)}です。ただし、導入費用も上がりやすいため、経済効果だけでなく防災価値も含めて検討するのがおすすめです。`;
   }
 
   return `現在の条件では、V2H適合度は「${v2hFit}」です。V2HはEV活用や停電対策に有効ですが、太陽光容量・EV利用頻度・導入費用によって効果が変わります。蓄電池のみの場合と比較しながら検討するのがおすすめです。`;

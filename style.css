@@ -114,7 +114,8 @@ button:hover,
 .chart-card,
 .compare-card,
 .breakdown-card,
-.explanation-card {
+.explanation-card,
+.selected-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 24px;
@@ -127,7 +128,8 @@ button:hover,
 .chart-card h3,
 .compare-card h3,
 .breakdown-card h3,
-.explanation-card h3 {
+.explanation-card h3,
+.selected-card h3 {
   margin: 0 0 20px;
 }
 
@@ -140,6 +142,13 @@ label {
   font-weight: 800;
   margin: 0 0 8px;
   color: var(--text);
+}
+
+.field-help {
+  margin: -2px 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
 select {
@@ -214,6 +223,38 @@ select:focus {
   margin: 0;
   line-height: 1.7;
   font-size: 14px;
+}
+
+.selected-card {
+  background: #ffffff;
+}
+
+.selected-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 0;
+}
+
+.selected-grid div {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.selected-grid dt {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.selected-grid dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .summary-grid {
@@ -311,13 +352,19 @@ th {
 
 .disclaimer {
   margin: 24px 0;
-  padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.72);
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.82);
   border: 1px solid #dbeafe;
   border-radius: 18px;
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.85;
+}
+
+.disclaimer h3 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: 17px;
 }
 
 .disclaimer p {
@@ -353,7 +400,8 @@ th {
   }
 
   .summary-grid,
-  .breakdown-grid {
+  .breakdown-grid,
+  .selected-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -370,14 +418,16 @@ th {
   .chart-card,
   .compare-card,
   .breakdown-card,
-  .explanation-card {
+  .explanation-card,
+  .selected-card {
     padding: 22px;
   }
 }
 
 @media (max-width: 520px) {
   .summary-grid,
-  .breakdown-grid {
+  .breakdown-grid,
+  .selected-grid {
     grid-template-columns: 1fr;
   }
 

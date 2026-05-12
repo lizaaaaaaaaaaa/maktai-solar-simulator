@@ -49,6 +49,14 @@
       </div>
 
       <div class="field">
+        <label for="powerPlan">電力プラン</label>
+        <p class="field-help">
+          契約中のプランに近いものを選択してください。わからない場合は、標準的なプランを選択してください。
+        </p>
+        <select id="powerPlan"></select>
+      </div>
+
+      <div class="field">
         <label for="monthlyBill">月の電気代</label>
         <select id="monthlyBill">
           <option value="8000">〜8,000円</option>
@@ -60,21 +68,26 @@
       </div>
 
       <div class="field">
-        <label for="fitStatus">卒FIT状況</label>
-        <select id="fitStatus">
-          <option value="post_fit">卒FIT済み</option>
-          <option value="soon">3年以内に卒FIT予定</option>
-          <option value="active">まだ先</option>
+        <label for="sellStatus">余った電気の売電状況</label>
+        <p class="field-help">
+          太陽光で余った電気を、どのような価格で売電しているかを選択してください。
+          わからない場合は「わからない」で問題ありません。
+        </p>
+        <select id="sellStatus">
+          <option value="post_fit">すでに売電価格が下がっている</option>
+          <option value="soon">数年以内に売電価格が下がる予定</option>
+          <option value="active">まだ固定価格で売電できている</option>
           <option value="unknown" selected>わからない</option>
+          <option value="no_solar">太陽光を設置していない</option>
         </select>
       </div>
 
       <div class="field">
         <label for="daytimeHome">昼間の在宅状況</label>
         <select id="daytimeHome">
-          <option value="low" selected>少ない</option>
-          <option value="middle">普通</option>
           <option value="high">多い</option>
+          <option value="middle">普通</option>
+          <option value="low" selected>少ない</option>
         </select>
       </div>
 
@@ -88,13 +101,11 @@
       </div>
 
       <div class="field">
-        <label for="disasterLevel">停電・災害対策の重視度</label>
+        <label for="disasterLevel">停電・災害対策の重要度</label>
         <select id="disasterLevel">
-          <option value="1">1：低い</option>
-          <option value="2">2</option>
-          <option value="3" selected>3：普通</option>
-          <option value="4">4</option>
-          <option value="5">5：高い</option>
+          <option value="low">低い</option>
+          <option value="middle" selected>普通</option>
+          <option value="high">高い</option>
         </select>
       </div>
 
@@ -110,8 +121,46 @@
       <div class="result-warning">
         <strong>この結果は補助金を含まない概算です。</strong>
         <p>
-          表示される金額には、自治体補助金・国の補助制度・キャンペーン・個別見積・工事費の増減は含まれていません。
+          表示される金額には、国・自治体の補助金、販売店キャンペーン、個別値引き、追加工事費、現地調査による費用増減は含まれていません。
         </p>
+      </div>
+
+      <div class="selected-card">
+        <h3>選択条件</h3>
+        <dl class="selected-grid">
+          <div>
+            <dt>太陽光容量</dt>
+            <dd id="selectedSolarKw">-</dd>
+          </div>
+          <div>
+            <dt>電力エリア</dt>
+            <dd id="selectedArea">-</dd>
+          </div>
+          <div>
+            <dt>電力プラン</dt>
+            <dd id="selectedPowerPlan">-</dd>
+          </div>
+          <div>
+            <dt>月の電気代</dt>
+            <dd id="selectedMonthlyBill">-</dd>
+          </div>
+          <div>
+            <dt>売電状況</dt>
+            <dd id="selectedSellStatus">-</dd>
+          </div>
+          <div>
+            <dt>昼間の在宅状況</dt>
+            <dd id="selectedDaytimeHome">-</dd>
+          </div>
+          <div>
+            <dt>EVの有無</dt>
+            <dd id="selectedEvStatus">-</dd>
+          </div>
+          <div>
+            <dt>停電・災害対策の重要度</dt>
+            <dd id="selectedDisasterLevel">-</dd>
+          </div>
+        </dl>
       </div>
 
       <div class="summary-grid">
@@ -191,14 +240,30 @@
       </div>
 
       <div class="disclaimer">
+        <h3>シミュレーションに関する注意事項</h3>
         <p>
-          本結果は、入力内容と一般的な電気料金・発電量の目安に基づく簡易シミュレーションです。
-          補助金、キャンペーン、機器価格、工事費、売電単価、実際の電力使用量は反映していません。
-          正確な金額は現地調査・見積・最新制度の確認が必要です。
+          本シミュレーションは、入力内容と一般的な発電量・電気料金の目安に基づく簡易試算です。
         </p>
         <p>
-          V2Hは、経済効果だけでなく、停電時の電源確保やEV活用価値を含めて検討する設備です。
-          導入費用が上がる可能性があるため、最終判断には現地確認と見積が必要です。
+          ご購入いただく太陽光パネル、蓄電池、V2H機器、設置状況、屋根条件、日射条件、電気使用状況、契約中の電力プランにより、実際の結果は変動します。
+        </p>
+        <p>
+          表示される経済効果は目安であり、経済性や導入効果を保証するものではありません。
+        </p>
+        <p>
+          本結果には、国・自治体の補助金、販売店キャンペーン、個別値引き、追加工事費、現地調査による費用増減は含まれていません。
+        </p>
+        <p>
+          電力単価、燃料費調整額、再生可能エネルギー発電促進賦課金、売電単価は、シミュレーション用の参考値を用いています。実際の単価は、契約中の電力会社・電力プラン・時期により異なります。
+        </p>
+        <p>
+          発電電力量、売電金額、買電削減金額、15年間の累計効果は、入力条件に基づく推計値です。太陽光パネルや蓄電池の経年劣化、利用環境、季節変動を完全に反映するものではありません。
+        </p>
+        <p>
+          V2Hの効果は、EVの有無、車種、バッテリー容量、利用頻度、充放電設定、停電時の使用方法により大きく変動します。
+        </p>
+        <p>
+          正確な導入可否、補助金の対象可否、費用、回収年数を確認するには、現地調査および正式見積が必要です。
         </p>
       </div>
 
