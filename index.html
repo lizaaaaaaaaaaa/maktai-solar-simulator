@@ -11,7 +11,7 @@
   <main class="simulator">
     <section class="hero">
       <p class="brand">MaktAI</p>
-      <h1>太陽光・蓄電池・V2Hシミレーター</h1>
+      <h1>太陽光・蓄電池・V2Hシミュレーター</h1>
       <p class="hero-copy">
         個人情報なしで、電気代削減・蓄電池容量・V2H適合度をかんたん診断。
       </p>
@@ -227,25 +227,28 @@
             <strong id="batteryBenefit">-</strong>
           </div>
           <div>
-            <p>V2H追加効果</p>
+            <p>V2H追加価値の目安</p>
             <strong id="v2hAdditionalBenefit">-</strong>
           </div>
         </div>
         <p class="small-note">
-          ※上記は入力条件に基づく概算です。実際の効果は電力使用量、機器構成、施工条件により変動します。
+          ※上記は入力条件に基づく概算です。V2H追加価値の目安には、余剰電力活用と停電対策価値の一部を含みます。
         </p>
       </div>
 
       <div class="chart-card">
         <h3>月別発電量</h3>
         <canvas id="generationChart"></canvas>
+        <p class="small-note">
+          ※月別発電量の合計が年間発電量と一致するように調整しています。
+        </p>
       </div>
 
       <div class="chart-card">
         <h3>V2Hなし / V2Hあり 比較</h3>
         <canvas id="v2hCompareChart"></canvas>
         <p class="small-note">
-          ※EVを所有していない場合、V2H追加効果は原則0円として表示されます。
+          ※V2Hありの金額は、V2Hによる経済効果を保証するものではありません。EVの利用状況、車種、充放電設定、導入費用により変動します。
         </p>
       </div>
 
@@ -273,6 +276,9 @@
         </p>
         <p>
           表示される経済効果は目安であり、経済性や導入効果を保証するものではありません。
+        </p>
+        <p>
+          V2H追加価値の目安は、EVを家庭の電力活用に使える可能性、余剰電力の活用、停電対策の価値を簡易的に数値化したものです。実際の経済効果や回収年数を保証するものではありません。
         </p>
         <p>
           本結果には、国・自治体の補助金、販売店キャンペーン、個別値引き、追加工事費、現地調査による費用増減は含まれていません。

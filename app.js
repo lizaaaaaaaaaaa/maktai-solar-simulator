@@ -92,7 +92,7 @@ function updateV2HExplanation(result) {
 function renderCompareTable(result) {
   const tbody = document.getElementById("compareTable");
 
-  const v2hEffectLabel =
+  const v2hValueLabel =
     result.evStatus === "no"
       ? "EV未所有のため対象外"
       : formatYen(result.v2hAdditionalBenefit);
@@ -109,13 +109,13 @@ function renderCompareTable(result) {
     result.evStatus === "no"
       ? "EV未所有のため効果算出対象外"
       : result.v2hAdditionalBenefit > 0
-        ? "EV活用による追加効果あり"
+        ? "EV活用・余剰電力活用の追加価値あり"
         : "条件により要確認";
 
   const rows = [
     ["年間メリット", formatYen(result.benefitWithoutV2H), formatYen(result.benefitWithV2H)],
     ["15年累計効果", formatYen(result.benefit15YearsWithoutV2H), formatYen(result.benefit15YearsWithV2H)],
-    ["V2H追加効果", "-", v2hEffectLabel],
+    ["V2H追加価値の目安", "-", v2hValueLabel],
     ["V2H評価コメント", "蓄電池中心の活用", v2hComment],
     ["推奨蓄電池容量", result.recommendedBattery, result.recommendedBattery],
     ["災害対策評価", disasterWithoutV2H, disasterWithV2H],

@@ -22,70 +22,63 @@ const AREA_LABELS = {
 
 const POWER_PLANS = {
   tohoku: {
-    standard_b: { label: "従量電灯B", buyPrice: 35, note: "標準的な従量制プランの参考値" },
-    enet_value: { label: "よりそう＋eねっとバリュー", buyPrice: 34, note: "一般家庭向けプランの参考値" },
-    family_value: { label: "よりそう＋ファミリーバリュー相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
-    night_holiday: { label: "よりそう＋ナイト＆ホリデー相当", buyPrice: 32, note: "夜間・休日活用プランの参考値" },
-    smart_time: { label: "よりそう＋スマートタイム相当", buyPrice: 32, note: "時間帯別プランの参考値" }
+    standard_b: { label: "従量電灯B", buyPrice: 35 },
+    enet_value: { label: "よりそう＋eねっとバリュー", buyPrice: 34 },
+    family_value: { label: "よりそう＋ファミリーバリュー相当", buyPrice: 34 },
+    night_holiday: { label: "よりそう＋ナイト＆ホリデー相当", buyPrice: 32 },
+    smart_time: { label: "よりそう＋スマートタイム相当", buyPrice: 32 }
   },
-
   tokyo: {
-    standard_b: { label: "従量電灯B", buyPrice: 36, note: "標準的な従量制プランの参考値" },
-    standard_c: { label: "従量電灯C相当", buyPrice: 36, note: "容量大きめ契約の参考値" },
-    standard_s: { label: "スタンダードS相当", buyPrice: 35, note: "一般家庭向けプランの参考値" },
-    premium_s: { label: "プレミアムS相当", buyPrice: 34, note: "使用量多め家庭向けの参考値" },
-    smart_life: { label: "スマートライフ系", buyPrice: 33, note: "オール電化・夜間活用プランの参考値" }
+    standard_b: { label: "従量電灯B", buyPrice: 36 },
+    standard_c: { label: "従量電灯C相当", buyPrice: 36 },
+    standard_s: { label: "スタンダードS相当", buyPrice: 35 },
+    premium_s: { label: "プレミアムS相当", buyPrice: 34 },
+    smart_life: { label: "スマートライフ系", buyPrice: 33 }
   },
-
   hokuriku: {
-    standard: { label: "従量電灯", buyPrice: 33, note: "標準的な従量制プランの参考値" },
-    next: { label: "従量電灯ネクスト相当", buyPrice: 32, note: "一般家庭向けプランの参考値" },
-    erai_tokutoku: { label: "節電とくとく電灯相当", buyPrice: 32, note: "一般家庭向けプランの参考値" },
-    night12: { label: "くつろぎナイト12", buyPrice: 30, note: "夜間・休日活用プランの参考値" }
+    standard: { label: "従量電灯", buyPrice: 33 },
+    next: { label: "従量電灯ネクスト相当", buyPrice: 32 },
+    erai_tokutoku: { label: "節電とくとく電灯相当", buyPrice: 32 },
+    night12: { label: "くつろぎナイト12", buyPrice: 30 }
   },
-
   chubu: {
-    standard_b: { label: "従量電灯B", buyPrice: 29, note: "標準的な従量制プランの参考値" },
-    point: { label: "ポイントプラン相当", buyPrice: 28, note: "一般家庭向けプランの参考値" },
-    otoku: { label: "おとくプラン相当", buyPrice: 28, note: "一般家庭向けプランの参考値" },
-    tokutoku: { label: "とくとくプラン相当", buyPrice: 28, note: "使用量多め家庭向けの参考値" },
-    smart_life: { label: "スマートライフプラン", buyPrice: 27, note: "夜間活用プランの参考値" },
-    smart_life_morning: { label: "スマートライフプラン 朝とく相当", buyPrice: 27, note: "朝型生活向け夜間活用プランの参考値" },
-    smart_life_night: { label: "スマートライフプラン 夜とく相当", buyPrice: 27, note: "夜型生活向け夜間活用プランの参考値" }
+    standard_b: { label: "従量電灯B", buyPrice: 29 },
+    point: { label: "ポイントプラン相当", buyPrice: 28 },
+    otoku: { label: "おとくプラン相当", buyPrice: 28 },
+    tokutoku: { label: "とくとくプラン相当", buyPrice: 28 },
+    smart_life: { label: "スマートライフプラン", buyPrice: 27 },
+    smart_life_morning: { label: "スマートライフプラン 朝とく相当", buyPrice: 27 },
+    smart_life_night: { label: "スマートライフプラン 夜とく相当", buyPrice: 27 }
   },
-
   kansai: {
-    standard_a: { label: "従量電灯A", buyPrice: 36, note: "標準的な従量制プランの参考値" },
-    standard_b: { label: "従量電灯B相当", buyPrice: 36, note: "容量大きめ契約の参考値" },
-    nattoku: { label: "なっトクでんき相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
-    with_point: { label: "withポイント でんき相当", buyPrice: 34, note: "一般家庭向けプランの参考値" },
-    hapie_r: { label: "はぴeタイムR", buyPrice: 32, note: "オール電化・時間帯別プランの参考値" }
+    standard_a: { label: "従量電灯A", buyPrice: 36 },
+    standard_b: { label: "従量電灯B相当", buyPrice: 36 },
+    nattoku: { label: "なっトクでんき相当", buyPrice: 34 },
+    with_point: { label: "withポイント でんき相当", buyPrice: 34 },
+    hapie_r: { label: "はぴeタイムR", buyPrice: 32 }
   },
-
   chugoku: {
-    standard_a: { label: "従量電灯A", buyPrice: 34, note: "標準的な従量制プランの参考値" },
-    standard_b: { label: "従量電灯B相当", buyPrice: 34, note: "容量大きめ契約の参考値" },
-    value: { label: "ぐっとずっと。プラン相当", buyPrice: 33, note: "一般家庭向けプランの参考値" },
-    smart_course: { label: "スマートコース相当", buyPrice: 33, note: "一般家庭向けプランの参考値" },
-    denka: { label: "電化Styleコース", buyPrice: 31, note: "オール電化・時間帯別プランの参考値" }
+    standard_a: { label: "従量電灯A", buyPrice: 34 },
+    standard_b: { label: "従量電灯B相当", buyPrice: 34 },
+    value: { label: "ぐっとずっと。プラン相当", buyPrice: 33 },
+    smart_course: { label: "スマートコース相当", buyPrice: 33 },
+    denka: { label: "電化Styleコース", buyPrice: 31 }
   },
-
   shikoku: {
-    standard_a: { label: "従量電灯A", buyPrice: 37, note: "標準的な従量制プランの参考値" },
-    standard_b: { label: "従量電灯B相当", buyPrice: 37, note: "容量大きめ契約の参考値" },
-    value: { label: "おトクeプラン相当", buyPrice: 35, note: "一般家庭向けプランの参考値" },
-    denka_e: { label: "でんかeプラン", buyPrice: 34, note: "電化住宅向けプランの参考値" },
-    smart_e: { label: "スマートeプラン相当", buyPrice: 34, note: "時間帯別プランの参考値" }
+    standard_a: { label: "従量電灯A", buyPrice: 37 },
+    standard_b: { label: "従量電灯B相当", buyPrice: 37 },
+    value: { label: "おトクeプラン相当", buyPrice: 35 },
+    denka_e: { label: "でんかeプラン", buyPrice: 34 },
+    smart_e: { label: "スマートeプラン相当", buyPrice: 34 }
   },
-
   kyushu: {
-    standard_b: { label: "従量電灯B", buyPrice: 27, note: "標準的な従量制プランの参考値" },
-    standard_c: { label: "従量電灯C相当", buyPrice: 27, note: "容量大きめ契約の参考値" },
-    smart_family: { label: "スマートファミリープラン相当", buyPrice: 26, note: "一般家庭向けプランの参考値" },
-    jikan_tai: { label: "時間帯別電灯相当", buyPrice: 25, note: "時間帯別プランの参考値" },
-    night_select_21: { label: "電化でナイト・セレクト21", buyPrice: 24, note: "夜間活用プランの参考値" },
-    night_select_22: { label: "電化でナイト・セレクト22", buyPrice: 24, note: "夜間活用プランの参考値" },
-    night_select_23: { label: "電化でナイト・セレクト23", buyPrice: 24, note: "夜間活用プランの参考値" }
+    standard_b: { label: "従量電灯B", buyPrice: 27 },
+    standard_c: { label: "従量電灯C相当", buyPrice: 27 },
+    smart_family: { label: "スマートファミリープラン相当", buyPrice: 26 },
+    jikan_tai: { label: "時間帯別電灯相当", buyPrice: 25 },
+    night_select_21: { label: "電化でナイト・セレクト21", buyPrice: 24 },
+    night_select_22: { label: "電化でナイト・セレクト22", buyPrice: 24 },
+    night_select_23: { label: "電化でナイト・セレクト23", buyPrice: 24 }
   }
 };
 
@@ -159,13 +152,24 @@ const BATTERY_UP_RATE = {
   low: 0.22
 };
 
+const V2H_UTILIZATION_RATE = {
+  high: 0.26,
+  middle: 0.20,
+  low: 0.14
+};
+
+const V2H_DISASTER_VALUE = {
+  low: 5000,
+  middle: 12000,
+  high: 20000
+};
+
 function calculateSimulation(input) {
   const solarKw = Number(input.solarKw);
   const areaFactor = AREA_FACTOR[input.area] || 1.0;
 
   const selectedPlan = getSelectedPowerPlan(input.area, input.powerPlan);
   const buyPrice = selectedPlan.buyPrice;
-
   const sellPrice = SELL_PRICE[input.sellStatus] ?? 10;
 
   const annualGeneration = Math.max(0, Math.round(solarKw * areaFactor * 1050));
@@ -173,22 +177,24 @@ function calculateSimulation(input) {
   const selfRate = SELF_CONSUMPTION_RATE[input.daytimeHome] || 0.35;
   const batteryUpRate = BATTERY_UP_RATE[input.daytimeHome] || 0.17;
 
+  const surplusRate = Math.max(0, 1 - selfRate);
+  const surplusGeneration = annualGeneration * surplusRate;
+
   const selfConsumptionBenefit = Math.round(annualGeneration * selfRate * buyPrice);
-  const sellIncome = Math.round(annualGeneration * (1 - selfRate) * sellPrice);
+  const sellIncome = Math.round(surplusGeneration * sellPrice);
   const batteryBenefit = Math.round(annualGeneration * batteryUpRate * buyPrice);
 
   const disasterScore = DISASTER_SCORE[input.disasterLevel] || 3;
 
-  const evFactor =
-    input.evStatus === "yes" ? 1 :
-    input.evStatus === "planned" ? 0.6 :
-    0;
-
-  let v2hAdditionalBenefit = 0;
-
-  if (solarKw > 0 && evFactor > 0) {
-    v2hAdditionalBenefit = Math.round(evFactor * solarKw * disasterScore * 8000);
-  }
+  const v2hAdditionalBenefit = calculateV2HAdditionalValue({
+    solarKw,
+    annualGeneration,
+    surplusGeneration,
+    buyPrice,
+    sellPrice,
+    evStatus: input.evStatus,
+    disasterLevel: input.disasterLevel
+  });
 
   const benefitWithoutV2H = Math.round(
     selfConsumptionBenefit + sellIncome + batteryBenefit
@@ -244,6 +250,33 @@ function calculateSimulation(input) {
   };
 }
 
+function calculateV2HAdditionalValue({
+  solarKw,
+  annualGeneration,
+  surplusGeneration,
+  buyPrice,
+  sellPrice,
+  evStatus,
+  disasterLevel
+}) {
+  if (solarKw <= 0 || evStatus === "no") {
+    return 0;
+  }
+
+  const evFactor = evStatus === "yes" ? 1 : 0.55;
+  const utilizationRate = V2H_UTILIZATION_RATE[disasterLevel] || 0.2;
+  const chargeDischargeEfficiency = 0.85;
+  const disasterValue = V2H_DISASTER_VALUE[disasterLevel] || 12000;
+
+  const effectiveUnitValue = Math.max(0, buyPrice - sellPrice);
+  const usableEnergy = surplusGeneration * utilizationRate * evFactor;
+
+  const energyValue = usableEnergy * effectiveUnitValue * chargeDischargeEfficiency;
+  const adjustedDisasterValue = disasterValue * evFactor;
+
+  return Math.round(energyValue + adjustedDisasterValue);
+}
+
 function getSelectedPowerPlan(area, planKey) {
   const areaPlans = POWER_PLANS[area] || POWER_PLANS.chugoku;
   return areaPlans[planKey] || Object.values(areaPlans)[0];
@@ -277,27 +310,46 @@ function getV2HExplanation({ solarKw, evStatus, disasterScore, v2hFit, v2hAdditi
   }
 
   if (evStatus === "no") {
-    return "EVを所有していないため、現時点ではV2Hの経済効果は見込みにくい状態です。V2HはEVのバッテリーを家庭側で活用する仕組みのため、EV購入予定が出てきた段階で再検討すると判断しやすくなります。";
+    return "EVを所有していないため、現時点ではV2Hの追加価値は見込みにくい状態です。V2HはEVのバッテリーを家庭側で活用する仕組みのため、EV購入予定が出てきた段階で再検討すると判断しやすくなります。";
   }
 
   if (evStatus === "planned") {
-    return `EV購入予定があるため、V2Hは将来的な検討候補になります。現在の条件ではV2H適合度は「${v2hFit}」です。停電対策を重視する場合は、蓄電池単体だけでなく、EV活用も含めて比較すると判断しやすくなります。`;
+    return `EV購入予定があるため、V2Hは将来的な検討候補になります。現在の条件ではV2H適合度は「${v2hFit}」です。V2H追加価値の目安は年間${formatYen(v2hAdditionalBenefit)}です。実際の効果は車種、利用頻度、充放電設定により変動します。`;
   }
 
   if (evStatus === "yes" && v2hFit === "高") {
-    return `EVを所有しており、太陽光容量と停電対策の重要度も高いため、V2Hとの相性は高めです。概算のV2H追加効果は年間${formatYen(v2hAdditionalBenefit)}です。ただし、導入費用も上がりやすいため、経済効果だけでなく防災価値も含めて検討するのがおすすめです。`;
+    return `EVを所有しており、太陽光容量と停電対策の重要度も高いため、V2Hとの相性は高めです。V2H追加価値の目安は年間${formatYen(v2hAdditionalBenefit)}です。ただし、導入費用も上がりやすいため、経済効果だけでなく防災価値も含めて検討するのがおすすめです。`;
   }
 
-  return `現在の条件では、V2H適合度は「${v2hFit}」です。V2HはEV活用や停電対策に有効ですが、太陽光容量・EV利用頻度・導入費用によって効果が変わります。蓄電池のみの場合と比較しながら検討するのがおすすめです。`;
+  return `現在の条件では、V2H適合度は「${v2hFit}」です。V2H追加価値の目安は年間${formatYen(v2hAdditionalBenefit)}です。V2HはEV活用や停電対策に有効ですが、太陽光容量・EV利用頻度・導入費用によって効果が変わります。`;
 }
 
 function createMonthlyGeneration(annualGeneration) {
   const monthlyRatio = [
-    0.06, 0.075, 0.09, 0.105, 0.115, 0.095,
-    0.11, 0.105, 0.085, 0.075, 0.06, 0.045
+    0.0588,
+    0.0735,
+    0.0882,
+    0.1029,
+    0.1127,
+    0.0931,
+    0.1078,
+    0.1029,
+    0.0833,
+    0.0735,
+    0.0588,
+    0.0445
   ];
 
-  return monthlyRatio.map((ratio) => Math.round(annualGeneration * ratio));
+  const monthlyGeneration = monthlyRatio.map((ratio) =>
+    Math.round(annualGeneration * ratio)
+  );
+
+  const total = monthlyGeneration.reduce((sum, value) => sum + value, 0);
+  const diff = annualGeneration - total;
+
+  monthlyGeneration[11] += diff;
+
+  return monthlyGeneration;
 }
 
 function formatYen(value) {
