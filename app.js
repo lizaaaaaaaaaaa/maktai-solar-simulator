@@ -113,8 +113,8 @@ function renderCompareTable(result) {
         : "条件により要確認";
 
   const rows = [
-    ["年間メリット", formatYen(result.benefitWithoutV2H), formatYen(result.benefitWithV2H)],
-    ["15年累計効果", formatYen(result.benefit15YearsWithoutV2H), formatYen(result.benefit15YearsWithV2H)],
+    ["年間メリット目安", formatYen(result.benefitWithoutV2H), formatYen(result.benefitWithV2H)],
+    ["15年累計効果目安", formatYen(result.benefit15YearsWithoutV2H), formatYen(result.benefit15YearsWithV2H)],
     ["V2H追加価値の目安", "-", v2hValueLabel],
     ["V2H評価コメント", "蓄電池中心の活用", v2hComment],
     ["推奨蓄電池容量", result.recommendedBattery, result.recommendedBattery],

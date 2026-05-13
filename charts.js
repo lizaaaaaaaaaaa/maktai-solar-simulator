@@ -70,7 +70,7 @@ function renderV2HCompareChart(result) {
   v2hCompareChartInstance = new Chart(canvas, {
     type: "bar",
     data: {
-      labels: ["年間メリット", "15年累計効果"],
+      labels: ["年間メリット目安", "15年累計効果目安"],
       datasets: [
         {
           label: "V2Hなし",
